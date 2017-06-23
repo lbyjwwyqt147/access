@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8a7c2520-6756-4b5d-99db-1c55be163ffe" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/pages/login/login.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/resources/scripts/common.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/pages/scripts/login-4.js" afterPath="$PROJECT_DIR$/assets/pages/scripts/login-4.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pages/login/login.html" afterPath="$PROJECT_DIR$/pages/login/login.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resources/scripts/common.js" afterPath="$PROJECT_DIR$/resources/scripts/common.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,15 +18,24 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="login.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pages/login/login.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
-              <caret line="453" column="4" lean-forward="true" selection-start-line="453" selection-start-column="4" selection-end-line="453" selection-end-column="4" />
+            <state relative-caret-position="196">
+              <caret line="425" column="21" lean-forward="false" selection-start-line="425" selection-start-column="12" selection-end-line="425" selection-end-column="21" />
               <folding>
                 <element signature="e#5033#5039#0" expanded="true" />
-                <element signature="e#22884#22890#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="page_user_login_4.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pages/login/page_user_login_4.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="269">
+              <caret line="440" column="43" lean-forward="false" selection-start-line="440" selection-start-column="32" selection-end-line="440" selection-end-column="43" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -45,11 +52,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="common.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="common.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/scripts/common.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="415">
-              <caret line="183" column="0" lean-forward="true" selection-start-line="183" selection-start-column="0" selection-end-line="183" selection-end-column="0" />
+            <state relative-caret-position="2275">
+              <caret line="176" column="46" lean-forward="false" selection-start-line="176" selection-start-column="46" selection-end-line="176" selection-end-column="46" />
               <folding />
             </state>
           </provider>
@@ -78,9 +85,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/resources/scripts/common.js" />
         <option value="$PROJECT_DIR$/assets/pages/scripts/login-4.js" />
         <option value="$PROJECT_DIR$/pages/login/login.html" />
+        <option value="$PROJECT_DIR$/resources/scripts/common.js" />
       </list>
     </option>
   </component>
@@ -298,12 +305,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1498206639888</updated>
-      <workItem from="1498206644575" duration="2111000" />
+      <workItem from="1498206644575" duration="3024000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2111000" />
+    <option name="totallyTimeSpent" value="3024000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -338,22 +345,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/pages/login/page_user_login_4.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="6" column="31" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="471" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/scripts/common.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="183" column="0" lean-forward="true" selection-start-line="183" selection-start-column="0" selection-end-line="183" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/pages/css/login-4-rtl.min.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -393,14 +384,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pages/login/page_user_login_4.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="440" column="43" lean-forward="false" selection-start-line="440" selection-start-column="32" selection-end-line="440" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pages/login/login.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="453" column="4" lean-forward="true" selection-start-line="453" selection-start-column="4" selection-end-line="453" selection-end-column="4" />
+        <state relative-caret-position="196">
+          <caret line="425" column="21" lean-forward="false" selection-start-line="425" selection-start-column="12" selection-end-line="425" selection-end-column="21" />
           <folding>
             <element signature="e#5033#5039#0" expanded="true" />
-            <element signature="e#22884#22890#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/scripts/common.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2275">
+          <caret line="176" column="46" lean-forward="false" selection-start-line="176" selection-start-column="46" selection-end-line="176" selection-end-column="46" />
+          <folding />
         </state>
       </provider>
     </entry>

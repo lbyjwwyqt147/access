@@ -174,9 +174,9 @@ var commonUtil = {
             //计算年份
             var currentYear = commonUtil.dateUtil.getCurrentYear();
             if(currentYear == 2017){
-                $("."+copyright).html("CopyRight © 2017 qiufeng.com , All Rights Reserved. ");
+                $("."+copyright).html(" © 2017 qiufeng.com , All Rights Reserved. ");
             }else{
-                $("."+copyright).html("CopyRight © 2017 - "+currentYear +" qiufeng.com , All Rights Reserved. ");
+                $("."+copyright).html(" © 2017 - "+currentYear +" qiufeng.com , All Rights Reserved. ");
 
             }
         }
@@ -186,5 +186,5 @@ var commonUtil = {
 };
 
 $(function(){
-
+   commonUtil.pageMsgUitl.setPageBottomMsg("copyright");
 });
