@@ -7,7 +7,7 @@ var commonUtil = {
      * 获取当前登录人的用户编号
      */
     memberId : "",
-    httpUrl:"",
+    httpUrl:"http://10.1.10.35:8080/security/api/signin",
     /**
      * 当前用户信息
      *
