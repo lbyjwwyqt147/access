@@ -1,15 +1,18 @@
 var Login = function () {
-
+    /**
+	 * 登录
+     */
 	var handleLogin = function() {
+		//验证登录
 		$('.login-form').validate({
 	            errorElement: 'span', //default input error message container
 	            errorClass: 'help-block', // default input error message class
 	            focusInvalid: false, // do not focus the last invalid input
 	            rules: {
-	                username: {
+                    userName: {
 	                    required: true
 	                },
-	                password: {
+                    userPwd: {
 	                    required: true
 	                },
 	                remember: {
@@ -18,11 +21,11 @@ var Login = function () {
 	            },
 
 	            messages: {
-	                username: {
-	                    required: "Username is required."
+                    userName: {
+	                    required: "请输入用户名."
 	                },
-	                password: {
-	                    required: "Password is required."
+                    userPwd: {
+	                    required: "请输入密码."
 	                }
 	            },
 
@@ -44,19 +47,39 @@ var Login = function () {
 	                error.insertAfter(element.closest('.input-icon'));
 	            },
 
-	            submitHandler: function (form) {
-	                form.submit();
-	            }
+
 	        });
+
+		    //开始登录
+		    function startLogin() {
+				commonUtil.inputTrim();
+                if ($('.login-form').validate().form()) {
+                    $.ajax({
+                        url: commonUtil.httpUrl + "/",
+                        data: $(".register-form").serialize(),
+                        type: "POST",
+                        dataType: "json",
+                        success: function (data, textStatus) {
+                            console.log(data);
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                        }
+                    });
+                }
+            }
 
 	        $('.login-form input').keypress(function (e) {
 	            if (e.which == 13) {
-	                if ($('.login-form').validate().form()) {
-	                    $('.login-form').submit();
-	                }
+					startLogin();
 	                return false;
 	            }
 	        });
+
+          jQuery('#login-btn').click(function () {
+              startLogin();
+           });
+
 	}
 
 	var handleForgetPassword = function () {
@@ -122,34 +145,10 @@ var Login = function () {
 
 	}
 
+    /**
+	 * 注册
+     */
 	var handleRegister = function () {
-
-		        function format(state) {
-            if (!state.id) { return state.text; }
-            var $state = $(
-             '<span><img src="../assets/global/img/flags/' + state.element.value.toLowerCase() + '.png" class="img-flag" /> ' + state.text + '</span>'
-            );
-            
-            return $state;
-        }
-
-        if (jQuery().select2 && $('#country_list').size() > 0) {
-            $("#country_list").select2({
-	            placeholder: '<i class="fa fa-map-marker"></i>&nbsp;Select a Country',
-	            templateResult: format,
-                templateSelection: format,
-                width: 'auto', 
-	            escapeMarkup: function(m) {
-	                return m;
-	            }
-	        });
-
-
-	        $('#country_list').change(function() {
-	            $('.register-form').validate().element($(this)); //revalidate the chosen dropdown value and show error or success message for the input
-	        });
-    	}
-
 
          $('.register-form').validate({
 	            errorElement: 'span', //default input error message container
@@ -157,42 +156,46 @@ var Login = function () {
 	            focusInvalid: false, // do not focus the last invalid input
 	            ignore: "",
 	            rules: {
-	                
-	                fullname: {
+
+                    userNickname: {
 	                    required: true
 	                },
-	                email: {
+                    userEmail: {
 	                    required: true,
 	                    email: true
 	                },
-	                address: {
+                    userName: {
 	                    required: true
 	                },
-	                city: {
-	                    required: true
-	                },
-	                country: {
-	                    required: true
-	                },
-
-	                username: {
-	                    required: true
-	                },
-	                password: {
+                    userPwd: {
 	                    required: true
 	                },
 	                rpassword: {
 	                    equalTo: "#register_password"
 	                },
-
 	                tnc: {
 	                    required: true
 	                }
 	            },
 
 	            messages: { // custom messages for radio buttons and checkboxes
+                    userNickname: {
+                        required: "请输入昵称."
+                    },
+                    userEmail: {
+                        required: "请输入邮箱."
+                    },
+                    userName: {
+                        required: "请输入用户名."
+                    },
+                    userPwd: {
+                        required: "请输入密码."
+                    },
+                    rpassword: {
+                        equalTo: "确认密码不一致."
+                    },
 	                tnc: {
-	                    required: "Please accept TNC first."
+	                    required: "请接受服务条款和隐私政策."
 	                }
 	            },
 
@@ -219,10 +222,6 @@ var Login = function () {
 	                	error.insertAfter(element);
 	                }
 	            },
-
-	            submitHandler: function (form) {
-	                form.submit();
-	            }
 	        });
 
 			$('.register-form input').keypress(function (e) {
@@ -235,9 +234,30 @@ var Login = function () {
 	        });
 
 	        jQuery('#register-btn').click(function () {
-	            jQuery('.login-form').hide();
-	            jQuery('.register-form').show();
+                jQuery('.login-form').hide();
+                jQuery('.register-form').show();
 	        });
+
+	        //注册事件
+			jQuery('#register-submit-btn').click(function () {
+                commonUtil.inputTrim();
+                if($('.register-form').validate.from()){
+                    $.ajax({
+                        url:commonUtil.httpUrl+"/",
+                        data:$(".register-form").serialize(),
+                        type:"POST",
+                        dataType:"json",
+                        success :function (data,textStatus) {
+                            console.log(data);
+                        },
+                        error:function (XMLHttpRequest, textStatus, errorThrown) {
+
+                        }
+                    });
+				}
+
+            });
+
 
 	        jQuery('#register-back-btn').click(function () {
 	            jQuery('.login-form').show();
