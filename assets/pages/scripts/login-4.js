@@ -55,7 +55,7 @@ var Login = function () {
 				commonUtil.inputTrim();
                 if ($('.login-form').validate().form()) {
                     $.ajax({
-                        url: commonUtil.httpUrl + "/",
+                        url: commonUtil.httpUrl + "",
                         data: $(".register-form").serialize(),
                         type: "POST",
                         dataType: "json",
@@ -227,7 +227,7 @@ var Login = function () {
 			$('.register-form input').keypress(function (e) {
 	            if (e.which == 13) {
 	                if ($('.register-form').validate().form()) {
-	                    $('.register-form').submit();
+                        registerSubmit();
 	                }
 	                return false;
 	            }
@@ -240,10 +240,21 @@ var Login = function () {
 
 	        //注册事件
 			jQuery('#register-submit-btn').click(function () {
+                registerSubmit();
+            });
+
+
+	        jQuery('#register-back-btn').click(function () {
+	            jQuery('.login-form').show();
+	            jQuery('.register-form').hide();
+	        });
+
+	        //注册
+	        function registerSubmit(){
                 commonUtil.inputTrim();
-                if($('.register-form').validate.from()){
+                if($('.register-form').validate().form()){
                     $.ajax({
-                        url:commonUtil.httpUrl+"/",
+                        url: commonUtil.httpUrl + "/users/signins",
                         data:$(".register-form").serialize(),
                         type:"POST",
                         dataType:"json",
@@ -254,15 +265,8 @@ var Login = function () {
 
                         }
                     });
-				}
-
-            });
-
-
-	        jQuery('#register-back-btn').click(function () {
-	            jQuery('.login-form').show();
-	            jQuery('.register-form').hide();
-	        });
+                }
+			}
 	}
     
     return {

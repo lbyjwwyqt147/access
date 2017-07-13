@@ -7,7 +7,7 @@ var commonUtil = {
      * 获取当前登录人的用户编号
      */
     memberId : "",
-    httpUrl:"http://10.1.10.35:8080/security/api/signin",
+    httpUrl:"http://127.0.0.1:8080/security/api/v1",
     /**
      * 当前用户信息
      *
@@ -16,7 +16,7 @@ var commonUtil = {
         var memberArray = "";
         if(id != ""){
             $.ajax({
-                url : 'bookkeeping/user/loginUserInfo',
+                url : '',
                 type : "post",
                 dataType : "json",
                 async : true,
