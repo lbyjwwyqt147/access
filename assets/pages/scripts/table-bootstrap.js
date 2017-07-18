@@ -26,7 +26,8 @@ var BootstrapTable = function () {
             $('#table-style').bootstrapTable('destroy')
                 .bootstrapTable({
                     classes: classes,
-                    striped: $('#striped').prop('checked')
+                    striped: $('#striped').prop('checked'),
+                    locale:'zh-CN'//中文支持
                 });
         });
 
