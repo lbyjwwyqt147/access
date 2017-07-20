@@ -1,12 +1,12 @@
-var Role  = function () {
+var UserList  = function () {
     var basicUrl = commonUtil.httpUrl;
-    var initRoleTable = function(){
+    var initUserTable = function(){
         //先销毁表格
-        $('#role-table-pagination').bootstrapTable('destroy');
+        $('#user-table-pagination').bootstrapTable('destroy');
         //初始化表格,动态从服务器加载数据
-        $("#role-table-pagination").bootstrapTable({
+        $("#user-table-pagination").bootstrapTable({
             method: "get",  //使用get请求到服务器获取数据
-            url:basicUrl+"/roles" , //获取数据的Servlet地址
+            url:basicUrl+"/users" , //获取数据的Servlet地址
             striped: true,  //表格显示条纹
             pagination: true, //启动分页
             pageSize: 20,  //每页显示的记录数
@@ -36,16 +36,16 @@ var Role  = function () {
         });
     }
 
- /*   $('#openAddRoleForm').on('click', function(){
-        layer.open({
-            type: 1,
-            area: ['600px', '360px'],
-            shadeClose: true, //点击遮罩关闭
-            content: initaddForm()
-        });
-    });*/
+    /*   $('#openAddRoleForm').on('click', function(){
+     layer.open({
+     type: 1,
+     area: ['600px', '360px'],
+     shadeClose: true, //点击遮罩关闭
+     content: initaddForm()
+     });
+     });*/
 
-    $('#openAddRoleForm').on('click', function(){
+    $('#openRoleForm').on('click', function(){
         layer.open({
             type: 2,
             title: 'iframe父子操作',
@@ -56,45 +56,18 @@ var Role  = function () {
         });
     });
 
-    $('#role-menus').on('click', function(){
-        layer.open({
-            type: 2,
-            title: 'iframe父子操作',
-            maxmin: true,
-            shadeClose: true, //点击遮罩关闭层
-            area : ['80%' , '80%'],
-            content: '../../../../access/pages/authority/menus/role_menus.html'
-        });
-    });
 
-    var initaddForm = function(){
-        var formContent = '\<\div class="portlet-body form"> <form class="form-horizontal" role="form" id="addRoleForm">'
-            + '<div class="form-body">'
-            + '<div class="form-group">'
-            +  '<label class="col-md-3 control-label">Block Help</label>'
-            +  '<div class="col-md-9">'
-            + '<input type="text" class="form-control" placeholder="Enter text">'
-            + '<span class="help-block"> A block of help text. </span>'
-            +  '</div>'
-       + '</div>'
-
-            + '</form>'
-            +'<\/div>';
-        //formContent.concat('')
-      //  formContent.concat('<\/div>');
-        return formContent;
-    }
 
     return {
         //main function to initiate the module
         init: function () {
 
-            initRoleTable();
+            initUserTable();
 
         }
     };
 }();
 
 jQuery(document).ready(function() {
-    Role.init();
+    UserList.init();
 });
