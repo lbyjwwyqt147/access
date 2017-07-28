@@ -55,15 +55,15 @@ var Login = function () {
 				commonUtil.inputTrim();
                 if ($('.login-form').validate().form()) {
                     $.ajax({
-                        url: commonUtil.httpUrl + "",
-                        data: $(".register-form").serialize(),
+                        url: commonUtil.httpUrl + "/users/logins",
+                        data: $(".login-form").serialize(),
                         type: "POST",
                         dataType: "json",
                         success: function (data, textStatus) {
                             console.log(data);
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
-
+                           alert("登录错误")
                         }
                     });
                 }
