@@ -1,12 +1,29 @@
 var Role  = function () {
     var basicUrl = commonUtil.httpUrl;
-    var initRoleTable = function(){
+    var roleTableData = function () {
+        $.ajax({
+            url: basicUrl+ "/roles",
+            type:"GET",
+            dataType:"json",
+            success :function (data,textStatus) {
+                console.log(data);
+                initRoleTable(data.rows);
+            },
+            error:function (XMLHttpRequest, textStatus, errorThrown) {
+
+            }
+        });
+    }
+
+    var initRoleTable = function(data){
         //先销毁表格
         $('#role-table-pagination').bootstrapTable('destroy');
         //初始化表格,动态从服务器加载数据
         $("#role-table-pagination").bootstrapTable({
-            method: "get",  //使用get请求到服务器获取数据
-            url:basicUrl+"/roles" , //获取数据的Servlet地址
+            data:data,
+          //  method: "get",  //使用get请求到服务器获取数据
+            dataType:"json",
+          //  url:basicUrl+"/roles" , //获取数据的Servlet地址
             striped: true,  //表格显示条纹
             pagination: true, //启动分页
             pageSize: 20,  //每页显示的记录数
@@ -52,7 +69,7 @@ var Role  = function () {
             maxmin: true,
             shadeClose: true, //点击遮罩关闭层
             area : ['800px' , '520px'],
-            content: '../../../access/pages/authority/role_add.html'
+            content: '../../../../access/pages/authority/role/role_add.html'
         });
     });
 
@@ -89,8 +106,8 @@ var Role  = function () {
         //main function to initiate the module
         init: function () {
 
-            initRoleTable();
-
+            roleTableData();
+            //initRoleTable();
         }
     };
 }();
