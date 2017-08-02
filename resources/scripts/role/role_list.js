@@ -65,10 +65,10 @@ var Role  = function () {
     $('#openAddRoleForm').on('click', function(){
         layer.open({
             type: 2,
-            title: 'iframe父子操作',
+            title: '添加角色',
             maxmin: true,
             shadeClose: true, //点击遮罩关闭层
-            area : ['800px' , '520px'],
+            area : ['65%' , '65%'],
             content: '../../../../access/pages/authority/role/role_add.html'
         });
     });
@@ -76,31 +76,14 @@ var Role  = function () {
     $('#role-menus').on('click', function(){
         layer.open({
             type: 2,
-            title: 'iframe父子操作',
+            title: '角色资源分配',
             maxmin: true,
             shadeClose: true, //点击遮罩关闭层
-            area : ['80%' , '80%'],
+            area : ['80%' , '90%'],
             content: '../../../../access/pages/authority/menus/role_menus.html'
         });
     });
 
-    var initaddForm = function(){
-        var formContent = '\<\div class="portlet-body form"> <form class="form-horizontal" role="form" id="addRoleForm">'
-            + '<div class="form-body">'
-            + '<div class="form-group">'
-            +  '<label class="col-md-3 control-label">Block Help</label>'
-            +  '<div class="col-md-9">'
-            + '<input type="text" class="form-control" placeholder="Enter text">'
-            + '<span class="help-block"> A block of help text. </span>'
-            +  '</div>'
-       + '</div>'
-
-            + '</form>'
-            +'<\/div>';
-        //formContent.concat('')
-      //  formContent.concat('<\/div>');
-        return formContent;
-    }
 
     return {
         //main function to initiate the module

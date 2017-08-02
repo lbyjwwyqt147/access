@@ -1,12 +1,30 @@
 var UserList  = function () {
     var basicUrl = commonUtil.httpUrl;
-    var initUserTable = function(){
+    var userId = "";
+
+    var userTableData = function () {
+        $.ajax({
+            url: basicUrl+ "/users",
+            type:"GET",
+            dataType:"json",
+            success :function (data,textStatus) {
+                console.log(data);
+                initUserTable(data.rows);
+            },
+            error:function (XMLHttpRequest, textStatus, errorThrown) {
+
+            }
+        });
+    }
+
+    var initUserTable = function(data){
         //先销毁表格
         $('#user-table-pagination').bootstrapTable('destroy');
         //初始化表格,动态从服务器加载数据
         $("#user-table-pagination").bootstrapTable({
-            method: "get",  //使用get请求到服务器获取数据
-            url:basicUrl+"/users" , //获取数据的Servlet地址
+          //  method: "get",  //使用get请求到服务器获取数据
+           // url:basicUrl+"/users" , //获取数据的Servlet地址
+            data:data,
             striped: true,  //表格显示条纹
             pagination: true, //启动分页
             pageSize: 20,  //每页显示的记录数
@@ -23,7 +41,7 @@ var UserList  = function () {
                 var param = {
                     pageNumber: params.pageNumber,
                     pageSize: params.pageSize,
-                    orderNum : $("#orderNum").val()
+                    userId : $("#userId").val()
                 };
                 return param;
             },
@@ -36,6 +54,15 @@ var UserList  = function () {
         });
     }
 
+    /**
+     * 获取选中行数据
+     */
+   function selecteions(){
+       var row= $('#user-table-pagination').bootstrapTable('getSelections');
+       console.log(row);
+       userId = row[0].userId;
+   }
+
     /*   $('#openAddRoleForm').on('click', function(){
      layer.open({
      type: 1,
@@ -46,13 +73,14 @@ var UserList  = function () {
      });*/
 
     $('#openRoleForm').on('click', function(){
+        selecteions();
         layer.open({
             type: 2,
-            title: 'iframe父子操作',
+            title: '分配角色',
             maxmin: true,
             shadeClose: true, //点击遮罩关闭层
-            area : ['800px' , '520px'],
-            content: '../../../access/pages/authority/role_add.html'
+            area : ['80%' , '80%'],
+            content: '../../../../access/pages/authority/role/user_role.html?userId='+userId
         });
     });
 
@@ -62,7 +90,7 @@ var UserList  = function () {
         //main function to initiate the module
         init: function () {
 
-            initUserTable();
+            userTableData();
 
         }
     };

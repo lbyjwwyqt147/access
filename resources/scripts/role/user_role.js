@@ -1,13 +1,34 @@
 var RoleUser  = function () {
     var basicUrl = commonUtil.httpUrl;
+    var userId = commonUtil.getUrlParams("userId");
+    var roleTableData = function () {
+        console.log("userId: "+userId);
+        $.ajax({
+            url: basicUrl+ "/userRolers/n",
+            type:"GET",
+            data:{
+                "userId":userId
+            },
+            dataType:"json",
+            success :function (data,textStatus) {
+                console.log(data);
+                initRoleTable(data.rows);
+            },
+            error:function (XMLHttpRequest, textStatus, errorThrown) {
+
+            }
+        });
+    }
+
     //初始化未分配角色表格
-    var initRoleTable = function(){
+    var initRoleTable = function(data){
         //先销毁表格
         $('#role-table-pagination').bootstrapTable('destroy');
         //初始化表格,动态从服务器加载数据
         $("#role-table-pagination").bootstrapTable({
-            method: "get",  //使用get请求到服务器获取数据
-            url:basicUrl+"/roles" , //获取数据的Servlet地址
+          //  method: "get",  //使用get请求到服务器获取数据
+          //  url:basicUrl+"/roles" , //获取数据的Servlet地址
+            data:data,
             striped: true,  //表格显示条纹
             pagination: true, //启动分页
             pageSize: 20,  //每页显示的记录数
@@ -38,14 +59,33 @@ var RoleUser  = function () {
     }
 
 
+    var userRoleTableData = function () {
+        $.ajax({
+            url: basicUrl+ "/userRolers/y",
+            data:{
+                    "userId":userId
+                  },
+            type:"GET",
+            dataType:"json",
+            success :function (data,textStatus) {
+                console.log(data);
+                initUserRoleTable(data.rows);
+            },
+            error:function (XMLHttpRequest, textStatus, errorThrown) {
+
+            }
+        });
+    }
+
     //初始化已分配角色表格
-    var initUserRoleTable = function(){
+    var initUserRoleTable = function(data){
         //先销毁表格
         $('#user-role-table-pagination').bootstrapTable('destroy');
         //初始化表格,动态从服务器加载数据
         $("#user-role-table-pagination").bootstrapTable({
-            method: "get",  //使用get请求到服务器获取数据
-            url:basicUrl+"/roles" , //获取数据的Servlet地址
+           // method: "get",  //使用get请求到服务器获取数据
+          //  url:basicUrl+"/roles" , //获取数据的Servlet地址
+            data:data,
             striped: true,  //表格显示条纹
             pagination: true, //启动分页
             pageSize: 20,  //每页显示的记录数
@@ -75,22 +115,78 @@ var RoleUser  = function () {
         });
     }
 
+    /**
+     * 获取选中行数据
+     */
+    function selecteions(tableId){
+        var roleIdsArray = new Array();
+        var row= $('#'+tableId).bootstrapTable('getSelections');
+        console.log(row);
+        $(row).each(function(i,v){
+            roleIdsArray.push(v.id);
+        });
+        return roleIdsArray;
+    }
 
+    /**
+     * 移除分配的角色
+     */
     $('#delRoleBtn').on('click', function(){
-        alert("删除");
+        roleHandle("user-role-table-pagination","DELETE");
     });
+
+    /**
+     * 给用户分配角色
+     */
     $('#addRoleBtn').on('click', function(){
-        alert("添加");
+        roleHandle("role-table-pagination","POST");
     });
 
+    /**
+     * 角色分配处理
+     * @param tableId
+     * @param methodType
+     */
+    function roleHandle(tableId,methodType){
+        var roleIdsArray = selecteions(tableId);
+        if(roleIdsArray.length > 0){
+            $.ajax({
+                url: basicUrl+ "/userRolers",
+                data:{
+                    "userId":userId,
+                    "roleIds":roleIdsArray.join(",")
+                },
+                type:methodType,
+                dataType:"json",
+                success :function (data,textStatus) {
+                    console.log(data);
+                    onRefreshTalbe();
+                },
+                error:function (XMLHttpRequest, textStatus, errorThrown) {
 
+                }
+            });
+        }
+    }
+
+    /**
+     * 刷新表格数据
+     */
+    function onRefreshTalbe(){
+        $('#user-role-table-pagination').bootstrapTable('load', {
+            "userId":userId
+        });
+        $('#role-table-pagination').bootstrapTable('load', {
+            "userId":userId
+        });
+    }
 
     return {
         //main function to initiate the module
         init: function () {
 
-            initRoleTable();
-            initUserRoleTable();
+            roleTableData();
+            userRoleTableData();
 
         }
     };
