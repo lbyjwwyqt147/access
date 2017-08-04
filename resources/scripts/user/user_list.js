@@ -60,7 +60,16 @@ var UserList  = function () {
    function selecteions(){
        var row= $('#user-table-pagination').bootstrapTable('getSelections');
        console.log(row);
-       userId = row[0].userId;
+       if(row.length == 0){
+           layer.alert('请选择用户', {
+               skin: 'layui-layer-lan',
+               closeBtn: 1,
+               anim: 4 //动画类型
+           });
+       }else{
+           userId = row[0].userId;
+       }
+
    }
 
     /*   $('#openAddRoleForm').on('click', function(){
@@ -74,14 +83,17 @@ var UserList  = function () {
 
     $('#openRoleForm').on('click', function(){
         selecteions();
-        layer.open({
-            type: 2,
-            title: '分配角色',
-            maxmin: true,
-            shadeClose: true, //点击遮罩关闭层
-            area : ['80%' , '80%'],
-            content: '../../../../access/pages/authority/role/user_role.html?userId='+userId
-        });
+        if(userId != ''){
+            layer.open({
+                type: 2,
+                title: '分配角色',
+                maxmin: true,
+                shadeClose: true, //点击遮罩关闭层
+                area : ['80%' , '80%'],
+                content: '../../../../access/pages/authority/role/user_role.html?userId='+userId
+            });
+        }
+
     });
 
 

@@ -151,16 +151,20 @@ var RoleUser  = function () {
         var roleIdsArray = selecteions(tableId);
         if(roleIdsArray.length > 0){
             $.ajax({
-                url: basicUrl+ "/userRolers",
-                data:{
+                url: basicUrl+ "/userRolers?userId="+userId+"&roleIds="+roleIdsArray.join(","),
+              /*  data:{
                     "userId":userId,
                     "roleIds":roleIdsArray.join(",")
-                },
+                },*/
                 type:methodType,
+             //   contentType: 'application/json',
                 dataType:"json",
                 success :function (data,textStatus) {
                     console.log(data);
-                    onRefreshTalbe();
+                    if(data.status == 0){
+                        onRefreshTalbe();
+                    }
+
                 },
                 error:function (XMLHttpRequest, textStatus, errorThrown) {
 
@@ -173,12 +177,14 @@ var RoleUser  = function () {
      * 刷新表格数据
      */
     function onRefreshTalbe(){
-        $('#user-role-table-pagination').bootstrapTable('load', {
+        roleTableData();
+        userRoleTableData();
+      /*  $('#user-role-table-pagination').bootstrapTable('load', {
             "userId":userId
         });
         $('#role-table-pagination').bootstrapTable('load', {
             "userId":userId
-        });
+        });*/
     }
 
     return {

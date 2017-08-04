@@ -2,6 +2,7 @@ var RoleForm  = function () {
     var basicUrl = commonUtil.httpUrl;
 
     function submitForm() {
+        commonUtil.inputTrim();
         $.ajax({
             url: basicUrl+ "/roles",
             data:$("#addRoleForm").serialize(),
