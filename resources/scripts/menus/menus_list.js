@@ -8,7 +8,7 @@ var Menus  = function () {
         $.ajax({
             url: basicUrl+ "/resourceMenus/tree2",
             data:{
-                "pid":pid == "" ? "#" : pid
+                "pid":pid == "" ? "1" : pid
             },
             type:"GET",
             dataType:"json",
