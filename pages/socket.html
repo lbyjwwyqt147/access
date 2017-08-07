@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>webSocket</title>
+    <script src="https://cdn.bootcss.com/angular.js/1.5.6/angular.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/sockjs-client/1.1.4/sockjs.min.js"></script>
+    <script src="https://cdn.bootcss.com/stomp.js/2.3.3/stomp.min.js"></script>
+    <script type="text/javascript">
+
+
+        var stompClient = null;
+
+        function setConnected(connected) {
+            $("#connect").prop("disabled", connected);
+            $("#disconnect").prop("disabled", !connected);
+            if (connected) {
+                $("#conversation").show();
+            }
+            else {
+                $("#conversation").hide();
+            }
+            $("#greetings").html("");
+        }
+
+
+        function connect() {
+            console.log("连接socket .........");
+            var socket = new SockJS('http://127.0.0.1:8080/my-websocket');
+            stompClient = Stomp.over(socket);
+            stompClient.connect({}, function (frame) {
+                setConnected(true);
+                console.log('Connected: ' + frame);
+                stompClient.subscribe('/topic/send', function (greeting) {
+                    console.log("调用 ： http://127.0.0.1:8080/topic/send ");
+                    console.log("greeting: " + greeting.body);
+                    showGreeting(JSON.parse(greeting.body).message);
+                });
+
+                stompClient.subscribe('/topic/callback', function(r) {
+                    console.log("调用 ： http://127.0.0.1:8080/topic/callback ");
+
+                    console.log("时间："+r.body);
+
+                    $("#dateView").html(r.body);
+                });
+            });
+        }
+
+        function disconnect() {
+            console.log("断开连接socket .........");
+            if (stompClient != null) {
+                stompClient.disconnect();
+            }
+            setConnected(false);
+            console.log("Disconnected");
+        }
+
+        function sendName() {
+            console.log("发送 socket .........")
+
+            stompClient.send("/app/send", {}, JSON.stringify({'message': $("#message").val()}));
+        }
+
+        function showGreeting(message) {
+            $("#greetings").append("<tr><td>" + message + "</td></tr>");
+        }
+
+        $(function () {
+            setConnected(false);
+            $("#conversation").hide();
+            $("form").on('submit', function (e) {
+                e.preventDefault();
+            });
+            $( "#connect" ).click(function() { connect(); });
+            $( "#disconnect" ).click(function() { disconnect(); });
+            $( "#send" ).click(function() { sendName(); });
+        });
+
+
+        /*   var stompClient = null;
+
+           var app = angular.module('app', []);
+           app.controller('MainController', function($rootScope, $scope, $http) {
+
+               $scope.data = {
+                   //连接状态
+                   connected : false,
+                   //消息
+                   message : '',
+                   rows : []
+               };
+
+               //连接
+               $scope.connect = function() {
+                   var socket = new SockJS('http://127.0.0.1:8080/my-websocket');
+                   stompClient = Stomp.over(socket);
+                   stompClient.connect({}, function(frame) {
+                       // 注册发送消息
+                       stompClient.subscribe('http://127.0.0.1:8080/topic/send', function(msg) {
+                           console.log("发送：" + msg);
+                           $scope.data.rows.push(JSON.parse(msg.body));
+                           $scope.data.connected = true;
+                           $scope.$apply();
+                       });
+                       // 注册推送时间回调
+                       stompClient.subscribe('http://127.0.0.1:8080/topic/callback', function(r) {
+                           console.log("回调："+r)
+                           $scope.data.time = '当前服务器时间：' + r.body;
+                           $scope.data.connected = true;
+                           $scope.$apply();
+                       });
+
+                       $scope.data.connected = true;
+                       $scope.$apply();
+                   });
+               };
+
+               $scope.disconnect = function() {
+                   if (stompClient != null) {
+                       stompClient.disconnect();
+                   }
+                   $scope.data.connected = false;
+               }
+
+               $scope.send = function() {
+                   stompClient.send("http://127.0.0.1:8080/app/send", {}, JSON.stringify({
+                       'message' : $scope.data.message
+                   }));
+               }
+           });*/
+
+    </script>
+</head>
+<body >
+
+<label>WebSocket连接状态:</label>
+<button type="button" id="connect" >连接</button>
+<button type="button" id="disconnect">断开</button>
+<br />
+<br />
+
+<div id="conversation" >
+    当前系统时间：<label id="dateView"></label>
+    <br />
+    <br />
+
+    <label>输入消息内容:</label>
+    <input type="text" name="message" id="message" placeholder="请输入内容..." />
+    <button  type="button" id="send">发送</button>
+
+
+    <br /> <br /> 消息列表： <br />
+
+    <table id="greetings"></table>
+
+</div>
+
+
+<!--label>WebSocket连接状态:</label>
+<button type="button" ng-disabled="data.connected" ng-click="connect()">连接</button>
+<button type="button" ng-click="disconnect()"
+        ng-disabled="!data.connected">断开</button>
+<br />
+<br />
+<div ng-show="data.connected">
+    <label>{{data.time}}</label> <br /> <br /> <input type="text"
+                                                      ng-model="data.message" placeholder="请输入内容..." />
+    <button ng-click="send()" type="button">发送</button>
+    <br /> <br /> 消息列表： <br />
+    <table>
+        <thead>
+        <tr>
+            <th>内容</th>
+            <th>时间</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="row in data.rows">
+            <td>{{row.message}}</td>
+            <td>{{row.data.total}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>-->
+</body>
+</html>

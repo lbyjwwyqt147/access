@@ -13,8 +13,9 @@ var MenusForm  = function () {
             success :function (data,textStatus) {
                 console.log(data);
                 $("#muens-form")[0].reset();
-                parent.refurbish();
+                var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
                 parent.layer.close(index);
+
             },
             error:function (XMLHttpRequest, textStatus, errorThrown) {
 

@@ -100,6 +100,7 @@ var Menus  = function () {
                r.push(data.instance.get_node(data.selected[i]).a_attr.bid);
            }
            pid = r.join(', ');
+           console.log("pid: " + pid);
            initTableData(pid);
        });
 
@@ -207,16 +208,23 @@ var Menus  = function () {
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['63%' , '80%'],
-                content: '../../../../access/pages/authority/menus/menus_add.html?pid='+pid
+                content: '../../../../access/pages/authority/menus/menus_add.html?pid='+pid,
+                end: function () {
+                    refurbish();
+                }
             });
         }
     });
+
+    $('#reload-tree').on("click",function () {
+        refurbish();
+    })
 
     /**
      * 刷新数据
      */
     function refurbish() {
-        $('#menus_tree').jstree('refresh');
+        $("#menus_tree").jstree(true).refresh();
     }
 
     /**
