@@ -20,7 +20,7 @@ var UITree = function () {
         });
 
         // handle link clicks in tree nodes(support target="_blank" as well)
-        $('#tree_1').on('select_node.jstree', function(e,data) { 
+        $('#tree_1').on('select_node.jstree', function(e,data) {
             var link = $('#' + data.selected).find('a');
             if (link.attr("href") != "#" && link.attr("href") != "javascript:;" && link.attr("href") != "") {
                 if (link.attr("target") == "_blank") {

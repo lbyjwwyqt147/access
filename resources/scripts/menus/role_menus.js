@@ -1,73 +1,67 @@
 var RoleMenus  = function () {
     var basicUrl = commonUtil.httpUrl;
+    var roleId = commonUtil.getUrlParams("roleId");
+    var menusIdsArray = new Array();
+    /**
+     * 已分配资源树 数据源
+     * @param roleId
+     */
+    var getTreeYesData = function () {
+        $('#role-menus-tree').data('jstree',false);
+        $.ajax({
+            url: basicUrl+ "/resourceMenus/y",
+            data:{
+                "roleId":roleId
+            },
+            type:"GET",
+            dataType:"json",
+            success :function (data,textStatus) {
+                console.log(data);
+                initRoleMenusTree(data);
+            },
+            error:function (XMLHttpRequest, textStatus, errorThrown) {
+
+            }
+        });
+    }
+
+
+    /**
+     * 未分配资源树 数据源
+     * @param roleId
+     */
+    var getTreeNoData = function () {
+        $('#tree_menus').data('jstree',false);
+        $.ajax({
+            url: basicUrl+ "/resourceMenus/n",
+            data:{
+                "roleId":roleId
+            },
+            type:"GET",
+            dataType:"json",
+            success :function (data,textStatus) {
+                console.log(data);
+
+                initMenusTree(data);
+
+            },
+            error:function (XMLHttpRequest, textStatus, errorThrown) {
+
+            }
+        });
+    }
+
+
 
     //初始化未分配菜单树
-    var initMenusTree = function () {
-     /*   $("#tree_menus").jstree({
-            "core" : {
-                "themes" : {
-                    "responsive": false
-                },
-                // so that create works
-                "check_callback" : true,
-                'data' : {
-                    'url' : function (node) {
-                        return '../demo/jstree_ajax_data.php';
-                    },
-                    'data' : function (node) {
-                        return { 'parent' : node.id };
-                    }
-                }
-            },
-            "types" : {
-                "default" : {
-                    "icon" : "fa fa-folder icon-state-warning icon-lg"
-                },
-                "file" : {
-                    "icon" : "fa fa-file icon-state-warning icon-lg"
-                }
-            },
-            "state" : { "key" : "demo3" },
-            "plugins" : [ "dnd", "state", "types" ]
-        });*/
-
-
+    var initMenusTree = function (data) {
         $('#tree_menus').jstree({
             'plugins': ["wholerow", "checkbox", "types"],
             'core': {
                 "themes" : {
                     "responsive": false
                 },
-                'data': [{
-                    "text": "Same but with checkboxes",
-                    "children": [{
-                        "text": "initially selected",
-                        "state": {
-                            "selected": true
-                        }
-                    }, {
-                        "text": "custom icon",
-                        "icon": "fa fa-warning icon-state-danger"
-                    }, {
-                        "text": "initially open",
-                        "icon" : "fa fa-folder icon-state-default",
-                        "state": {
-                            "opened": true
-                        },
-                        "children": ["Another node"]
-                    }, {
-                        "text": "custom icon",
-                        "icon": "fa fa-warning icon-state-warning"
-                    }, {
-                        "text": "disabled node",
-                        "icon": "fa fa-check icon-state-success",
-                        "state": {
-                            "disabled": true
-                        }
-                    }]
-                },
-                    "And wholerow selection"
-                ]
+                'data': data
             },
             "types" : {
                 "default" : {
@@ -81,45 +75,14 @@ var RoleMenus  = function () {
     };
 
     //初始化已分配菜单树
-    var initRoleMenusTree = function () {
-
-
+    var initRoleMenusTree = function (data) {
         $('#role-menus-tree').jstree({
             'plugins': ["wholerow", "checkbox", "types"],
             'core': {
                 "themes" : {
                     "responsive": false
                 },
-                'data': [{
-                    "text": "Same but with checkboxes",
-                    "children": [{
-                        "text": "initially selected",
-                        "state": {
-                            "selected": true
-                        }
-                    }, {
-                        "text": "custom icon",
-                        "icon": "fa fa-warning icon-state-danger"
-                    }, {
-                        "text": "initially open",
-                        "icon" : "fa fa-folder icon-state-default",
-                        "state": {
-                            "opened": true
-                        },
-                        "children": ["Another node"]
-                    }, {
-                        "text": "custom icon",
-                        "icon": "fa fa-warning icon-state-warning"
-                    }, {
-                        "text": "disabled node",
-                        "icon": "fa fa-check icon-state-success",
-                        "state": {
-                            "disabled": true
-                        }
-                    }]
-                },
-                    "And wholerow selection"
-                ]
+                'data':data
             },
             "types" : {
                 "default" : {
@@ -130,42 +93,118 @@ var RoleMenus  = function () {
                 }
             }
         });
-
-
-  /*      $("#role-menus-tree").jstree({
-            "core" : {
-                "themes" : {
-                    "responsive": false
-                },
-                // so that create works
-                "check_callback" : true,
-                'data' : {
-                    'url' : function (node) {
-                        return '../demo/jstree_ajax_data.php';
-                    },
-                    'data' : function (node) {
-                        return { 'parent' : node.id };
-                    }
-                }
-            },
-            "types" : {
-                "default" : {
-                    "icon" : "fa fa-folder icon-state-warning icon-lg"
-                },
-                "file" : {
-                    "icon" : "fa fa-file icon-state-warning icon-lg"
-                }
-            },
-            "state" : { "key" : "demo3" },
-            "plugins" : [ "dnd", "state", "types" ]
-        });*/
     };
+
+
+    /**
+     * 获取选中行数据
+     */
+    function selecteions(treeId){
+
+    /*    $('#'+treeId).on('select_node.jstree', function(e,data) {
+            var i, j = [];
+            for(i = 0, j = data.selected.length; i < j; i++) {
+                console.log("节点ID：" + data.instance.get_node(data.selected[i]).id);
+                console.log("parentId : " + data.instance.get_node(data.selected[i]).a_attr.parentId);
+                var id = data.instance.get_node(data.selected[i]).id;
+                var parentId = data.instance.get_node(data.selected[i]).a_attr.parentId;
+                if(id != 1 ){
+                    menusIdsArray.push(id);
+                }
+                if( parentId != 1 && typeof(parentId) == undefined ){
+                    menusIdsArray.push(parentId);
+                }
+            }
+        });
+*/
+
+        menusIdsArray = new  Array();
+
+       // var nodes = $("#"+treeId).jstree("get_checked"); //使用get_checked方法 获取选中节点ID值
+        var nodes = $("#"+treeId).jstree("get_checked"); //使用get_checked方法 获取选中节点元素
+        $.each(nodes, function(i, v) {
+            var node = $('#'+treeId).jstree("get_node", v);
+            console.log(node);
+            var parentId = node.a_attr.parentId;
+
+            console.log("节点ID：" + v);
+            console.log("parentId : " + parentId);
+
+            if(v != 1){
+                menusIdsArray.push(v);
+            }
+            if(typeof(parentId) != "undefined" ){
+                menusIdsArray.push(parentId);
+                var parentNode = $('#'+treeId).jstree("get_node", parentId);
+                var parentNodeId = parentNode.a_attr.parentId;
+                console.log("parentNodeId : " + parentNodeId);
+            }
+            if(typeof(parentNodeId) != "undefined" ){
+                menusIdsArray.push(parentNodeId);
+            }
+
+        });
+
+        menusIdsArray.sort();
+        $.unique(menusIdsArray);
+    }
+
+    /**
+     * 移除分配的资源菜单
+     */
+    $('#delMenusBtn').on('click', function(){
+        menusHandle("role-menus-tree","DELETE");
+    });
+
+    /**
+     * 给角色分配资源菜单
+     */
+    $('#addMenusBtn').on('click', function(){
+        menusHandle("tree_menus","POST");
+    });
+
+    /**
+     * 资源菜单分配处理
+     * @param treeId
+     * @param methodType
+     */
+    function menusHandle(treeId,methodType){
+        selecteions(treeId);
+        console.log(menusIdsArray.join(","));
+        if(menusIdsArray.length > 0){
+            $.ajax({
+                url: basicUrl+ "/roleMenus?roleId="+roleId+"&menusId="+menusIdsArray.join(","),
+                type:methodType,
+                dataType:"json",
+                success :function (data,textStatus) {
+                    console.log(data);
+                    if(data.status == 0){
+                        onRefreshData();
+                    }
+
+                },
+                error:function (XMLHttpRequest, textStatus, errorThrown) {
+
+                }
+            });
+
+        }
+    }
+
+    /**
+     * 刷新表格数据
+     */
+    function onRefreshData(){
+        getTreeYesData();
+        getTreeNoData();
+    }
+
 
     return {
         //main function to initiate the module
         init: function () {
-            initMenusTree();
-            initRoleMenusTree();
+            getTreeYesData();
+            getTreeNoData();
         }
     };
 }();

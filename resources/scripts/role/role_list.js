@@ -1,5 +1,6 @@
 var Role  = function () {
     var basicUrl = commonUtil.httpUrl;
+    var roleId = "";
     var roleTableData = function () {
         $.ajax({
             url: basicUrl+ "/roles",
@@ -53,35 +54,54 @@ var Role  = function () {
         });
     }
 
- /*   $('#openAddRoleForm').on('click', function(){
-        layer.open({
-            type: 1,
-            area: ['600px', '360px'],
-            shadeClose: true, //点击遮罩关闭
-            content: initaddForm()
-        });
-    });*/
+    /**
+     * 获取选中行数据
+     */
+    function selecteions(){
+        var row= $('#role-table-pagination').bootstrapTable('getSelections');
+        console.log(row);
+        if(row.length == 0){
+            layer.alert('请选择角色', {
+                skin: 'layui-layer-lan',
+                closeBtn: 1,
+                anim: 4 //动画类型
+            });
+        }else{
+            roleId = row[0].id;
+        }
 
+    }
+
+    /**
+     * 新增角色
+     */
     $('#openAddRoleForm').on('click', function(){
-        layer.open({
-            type: 2,
-            title: '添加角色',
-            maxmin: true,
-            shadeClose: true, //点击遮罩关闭层
-            area : ['65%' , '65%'],
-            content: '../../../../access/pages/authority/role/role_add.html'
-        });
+            layer.open({
+                type: 2,
+                title: '添加角色',
+                maxmin: true,
+                shadeClose: true, //点击遮罩关闭层
+                area : ['65%' , '65%'],
+                content: '../../../../access/pages/authority/role/role_add.html'
+            });
+
     });
 
+    /**
+     * 权限分配
+     */
     $('#role-menus').on('click', function(){
-        layer.open({
-            type: 2,
-            title: '角色资源分配',
-            maxmin: true,
-            shadeClose: true, //点击遮罩关闭层
-            area : ['80%' , '90%'],
-            content: '../../../../access/pages/authority/menus/role_menus.html'
-        });
+        selecteions();
+        if(roleId != '') {
+            layer.open({
+                type: 2,
+                title: '角色资源分配',
+                maxmin: true,
+                shadeClose: true, //点击遮罩关闭层
+                area: ['80%', '90%'],
+                content: '../../../../access/pages/authority/menus/role_menus.html?roleId=' + roleId
+            });
+        }
     });
 
 
