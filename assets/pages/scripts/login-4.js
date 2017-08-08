@@ -61,6 +61,9 @@ var Login = function () {
                         dataType: "json",
                         success: function (data, textStatus) {
                             console.log(data);
+                            if(data.status == 0){
+                                window.location.href = "../access/pages/index.html";
+                            }
                         },
                         error: function (XMLHttpRequest, textStatus, errorThrown) {
                            alert("登录错误")
