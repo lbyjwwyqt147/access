@@ -42,7 +42,7 @@ var Index = function () {
             }else {
                 menusHtml+='<li class="nav-item ">';
             }
-            menusHtml+='<a href="javascript:;" class="nav-link nav-toggle">';
+            menusHtml+='<a href="javascript:Index.openPageHtml(\''+v.a_attr.url+'\');" onclick="Index.openPageHtml(\''+v.a_attr.url+'\');" class="nav-link nav-toggle">';
             menusHtml+='<i class="'+v.icon+'"></i>';
             menusHtml+='<span class="title">'+v.text+'</span>';
             if(i == 0){
@@ -55,8 +55,8 @@ var Index = function () {
             menusHtml+=findChildren(v);
         });
 
-        console.log(menusHtml)
-        $("#page-sidebar-menu").html(menusHtml);
+       // console.log(menusHtml)
+       $("#page-sidebar-menu").html(menusHtml);
     }
 
     /**
@@ -70,7 +70,7 @@ var Index = function () {
         console.log(children);
         $.each(children,function (i,v) {
                 html+='<li class="nav-item ">';
-                html+='<a href="javascript:;" class="nav-link">';
+                html+='<a href="javascript:Index.openPageHtml(\''+v.a_attr.url+'\');" class="nav-link">';
                 html+='<i class="'+v.icon+'"></i>';
                 html+='<span class="title">'+v.text+'</span>';
                 html+='</a>';
@@ -82,12 +82,24 @@ var Index = function () {
        return html;
     }
 
+    /**
+     * 打开页面
+     * @param url
+     */
+
+
 
     return {
         //main function to initiate the module
         init: function () {
 
             menusData();
+
+        },
+        openPageHtml: function(url) {
+            if(url != "" || url != null){
+                $("#mainIframe").attr("src",url);
+            }
 
         }
     };

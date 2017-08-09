@@ -11,7 +11,14 @@ var Role  = function () {
                 initRoleTable(data.rows);
             },
             error:function (XMLHttpRequest, textStatus, errorThrown) {
-
+                console.log(XMLHttpRequest);
+                console.log(textStatus);
+                console.log(errorThrown);
+                layer.alert('没有数据权限!', {
+                    skin: 'layui-layer-lan',
+                    closeBtn: 1,
+                    anim: 4 //动画类型
+                });
             }
         });
     }
