@@ -10,8 +10,8 @@ var Role  = function () {
                 console.log(data);
                 initRoleTable(data.rows);
             },
-            error:function (XMLHttpRequest, textStatus, errorThrown) {
-                console.log(XMLHttpRequest);
+            error:function (jqXHR , textStatus, errorThrown) {
+                console.log(jqXHR );
                 console.log(textStatus);
                 console.log(errorThrown);
                 layer.alert('没有数据权限!', {
@@ -19,6 +19,11 @@ var Role  = function () {
                     closeBtn: 1,
                     anim: 4 //动画类型
                 });
+            },
+            statusCode: {
+                403: function() {
+                    alert("302");
+                }
             }
         });
     }
