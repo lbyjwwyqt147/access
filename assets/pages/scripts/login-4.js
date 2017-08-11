@@ -58,16 +58,14 @@ var Login = function () {
                         url: commonUtil.httpUrl + "/users/logins",
                         data: $(".login-form").serialize(),
                         type: "POST",
-                        dataType: "text",
+                        dataType: "json",
                         success: function (data, textStatus) {
                             console.log(data);
-                            var jsonData = $.parseJSON(data);
-                            console.log(jsonData);
-                            if(jsonData.status == 0){
+                            if(data.status == 0){
                             	console.log("登录成功..........");
                                 window.location.href = "../../../access/pages/index.html";
                             }else{
-                                layer.alert(jsonData.msg, {
+                                layer.alert(data.msg, {
                                     skin: 'layui-layer-lan',
                                     closeBtn: 1,
                                     anim: 4 //动画类型

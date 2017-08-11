@@ -9,10 +9,22 @@ var UserList  = function () {
             dataType:"json",
             success :function (data,textStatus) {
                 console.log(data);
-                initUserTable(data.rows);
+                if(data.status == 0){
+                    initUserTable(data.rows);
+                }else{
+                    layer.alert(data.msg, {
+                        skin: 'layui-layer-lan',
+                        closeBtn: 1,
+                        anim: 4 //动画类型
+                    });
+                }
             },
             error:function (XMLHttpRequest, textStatus, errorThrown) {
-
+                layer.alert("网络错误!", {
+                    skin: 'layui-layer-lan',
+                    closeBtn: 1,
+                    anim: 4 //动画类型
+                });
             }
         });
     }

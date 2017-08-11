@@ -8,22 +8,23 @@ var Role  = function () {
             dataType:"json",
             success :function (data,textStatus) {
                 console.log(data);
-                initRoleTable(data.rows);
+                if(data.status == 0){
+                    initRoleTable(data.rows);
+                }else{
+                    layer.alert(data.msg, {
+                        skin: 'layui-layer-lan',
+                        closeBtn: 1,
+                        anim: 4 //动画类型
+                    });
+                }
+
             },
             error:function (jqXHR , textStatus, errorThrown) {
-                console.log(jqXHR );
-                console.log(textStatus);
-                console.log(errorThrown);
-                layer.alert('没有数据权限!', {
+                layer.alert('网络错误!', {
                     skin: 'layui-layer-lan',
                     closeBtn: 1,
                     anim: 4 //动画类型
                 });
-            },
-            statusCode: {
-                403: function() {
-                    alert("302");
-                }
             }
         });
     }
