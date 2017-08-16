@@ -7,7 +7,25 @@ var commonUtil = {
      * 获取当前登录人的用户编号
      */
     memberId : "",
+    token:"",
+    sessionId:"",
     httpUrl:"http://127.0.0.1:18080/security/api/v1",
+
+    setSeesionId : function (sessionId) {
+        this.sessionId = sessionId;
+    },
+    getSessionId:function () {
+       return this.sessionId;
+    },
+
+    setToken : function (token) {
+        this.token = token;
+    },
+    getToken:function () {
+        return this.token;
+    },
+
+
     /**
      * 当前用户信息
      *
@@ -40,7 +58,6 @@ var commonUtil = {
     logiOut : function(memberId){
 
     },
-
 
     getUrlParams:function(name){
         var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");

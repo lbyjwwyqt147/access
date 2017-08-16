@@ -1,12 +1,48 @@
 var Role  = function () {
     var basicUrl = commonUtil.httpUrl;
     var roleId = "";
+
+
     var roleTableData = function () {
+        console.log(commonUtil.sessionId);
+
+        console.log(sessionId);
+      //  document.cookie="SESSION=222222222222222222";
+
+      //  $.cookie('SESSION',"222222222222222222");
+        //$.cookie('token', "11111111111");
+
+     //   console.log($.cookie('SESSION'));
+       // console.log($.cookie('token'));
+        console.log(document.cookie);
         $.ajax({
             url: basicUrl+ "/roles",
+            data:{
+                "SESSION":"222222"
+            },
             type:"GET",
             dataType:"json",
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            beforeSend: function(request) {
+                request.setRequestHeader("x-auth-token", "222222222222222222");
+            },
+          /*  headers: {
+                "Cookie": "SESSION=222222222222222222",
+                "x-auth-token":"233333"
+            },*/
+           /* headers: {
+                "x-auth-userId" : "",
+                "x-auth-token":"122211",
+                "x-auth-session":""
+            },*/
+           /* beforeSend: function(reqObj, settings) {
+                reqObj.setRequestHeader('x-auth-token', 'VVV');
+            },*/
             success :function (data,textStatus) {
+
                 console.log(data);
                 if(data.status == 0){
                     initRoleTable(data.rows);

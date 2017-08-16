@@ -62,8 +62,19 @@ var Login = function () {
                         success: function (data, textStatus) {
                             console.log(data);
                             if(data.status == 0){
+                            	var obj = data.data;
+                            	console.log(obj);
+                                commonUtil.setSeesionId(obj.SESSION);
+                                commonUtil.setToken(obj.token);
+                            	document.cookie="SESSION="+obj.SESSION;
+                                $.cookie('SESSION', obj.SESSION);
+                                $.cookie('token', obj.token);
                             	console.log("登录成功..........");
-                                window.location.href = "../../../access/pages/index.html";
+                                var myObj = {};
+                                // data()添加属性
+                                $.data(myObj, 'name', 'aty');
+                                console.log(commonUtil.getSessionId());
+                                window.location.href = "../../../access/pages/index.html?SESSION="+obj.SESSION+"&TOKEN="+obj.token;
                             }else{
                                 layer.alert(data.msg, {
                                     skin: 'layui-layer-lan',
@@ -95,6 +106,8 @@ var Login = function () {
            });
 
 	}
+
+
 
 	var handleForgetPassword = function () {
 		$('.forget-form').validate({

@@ -1,16 +1,32 @@
 var Index = function () {
     var basicUrl = commonUtil.httpUrl;
     var userId = "";
-    var token = "";
+    var token = commonUtil.getUrlParams("TOKEN");
+    var sessionId = commonUtil.getUrlParams("SESSION");
     var roleId = 1;
     /**
      * 菜单数据源
      */
     var menusData = function() {
+        commonUtil.setToken(token);
+        commonUtil.setSeesionId(sessionId);
+        console.log(commonUtil.getSessionId());
+        // data()读取属性
+        console.log($.data({}, 'name'));//aty
+
         $.ajax( {
             url: basicUrl+ "/resourceMenus/user",
             data:{
-                "userId":userId
+                "userId":userId,
+                "SESSION":sessionId,
+                "token":token
+            },
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            beforeSend: function(request) {
+                request.setRequestHeader("x-auth-token", token);
             },
             type:'GET',
             dataType:'JSON',
