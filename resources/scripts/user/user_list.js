@@ -102,7 +102,7 @@ var UserList  = function () {
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['80%' , '80%'],
-                content: '../../../../access/pages/authority/role/user_role.html?userId='+userId
+                content: commonUtil.webUrl+'access/pages/authority/role/user_role.html?userId='+userId
             });
         }
 

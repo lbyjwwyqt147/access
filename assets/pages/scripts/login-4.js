@@ -74,7 +74,7 @@ var Login = function () {
                                 // data()添加属性
                                 $.data(myObj, 'name', 'aty');
                                 console.log(commonUtil.getSessionId());
-                                window.location.href = "../../../access/pages/index.html?SESSION="+obj.SESSION+"&TOKEN="+obj.token;
+                                window.location.href = commonUtil.webUrl+"access/pages/index.html?SESSION="+obj.SESSION+"&TOKEN="+obj.token;
                             }else{
                                 layer.alert(data.msg, {
                                     skin: 'layui-layer-lan',
