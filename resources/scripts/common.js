@@ -10,6 +10,8 @@ var commonUtil = {
     token:"",
     sessionId:"",
     httpUrl:"http://10.1.121.89:80/security/api/v1",
+    //webUrl:"http://localhost:63342/",
+    webUrl:"http://localhost:80/",
 
     setSeesionId : function (sessionId) {
         this.sessionId = sessionId;

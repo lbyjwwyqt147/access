@@ -131,7 +131,7 @@ var Role  = function () {
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['65%' , '65%'],
-                content: '../../../../access/pages/authority/role/role_add.html'
+                content: commonUtil.webUrl+'access/pages/authority/role/role_add.html'
             });
 
     });
@@ -148,7 +148,7 @@ var Role  = function () {
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area: ['80%', '90%'],
-                content: '../../../../access/pages/authority/menus/role_menus.html?roleId=' + roleId
+                content: commonUtil.webUrl+'access/pages/authority/menus/role_menus.html?roleId=' + roleId
             });
         }
     });
