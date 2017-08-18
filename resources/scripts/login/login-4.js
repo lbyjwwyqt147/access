@@ -74,7 +74,7 @@ var Login = function () {
                                 // data()添加属性
                                 $.data(myObj, 'name', 'aty');
                                 console.log(commonUtil.getSessionId());
-                                window.location.href = "../../../access/resources/pages/index.html?SESSION="+obj.SESSION+"&TOKEN="+obj.token;
+                                window.location.href = "resources/pages/index.html?SESSION="+obj.SESSION+"&TOKEN="+obj.token;
                             }else{
                                 layer.alert(data.msg, {
                                     skin: 'layui-layer-lan',
@@ -306,10 +306,10 @@ var Login = function () {
 
             // init background slide images
 		    $.backstretch([
-		        "../../../assets/pages/media/bg/1.jpg",
-		        "../../../assets/pages/media/bg/2.jpg",
-		        "../../../assets/pages/media/bg/3.jpg",
-		        "../../../assets/pages/media/bg/4.jpg"
+		        "assets/pages/media/bg/1.jpg",
+		        "assets/pages/media/bg/2.jpg",
+		        "assets/pages/media/bg/3.jpg",
+		        "assets/pages/media/bg/4.jpg"
 		        ], {
 		          fade: 1000,
 		          duration: 8000
