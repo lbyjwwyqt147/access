@@ -1,25 +1,21 @@
 var Role  = function () {
     var basicUrl = commonUtil.httpUrl;
     var roleId = "";
-
+    var  token = $.cookie('token');
 
     var roleTableData = function () {
-        console.log(commonUtil.sessionId);
+        console.log(commonUtil.getSessionId());
 
-        console.log(sessionId);
       //  document.cookie="SESSION=222222222222222222";
 
       //  $.cookie('SESSION',"222222222222222222");
         //$.cookie('token', "11111111111");
 
-     //   console.log($.cookie('SESSION'));
-       // console.log($.cookie('token'));
+        console.log($.cookie('SESSION'));
+        console.log($.cookie('token'));
         console.log(document.cookie);
         $.ajax({
             url: basicUrl+ "/roles",
-            data:{
-                "SESSION":"222222"
-            },
             type:"GET",
             dataType:"json",
             xhrFields: {
@@ -27,7 +23,7 @@ var Role  = function () {
             },
             crossDomain: true,
             beforeSend: function(request) {
-                request.setRequestHeader("x-auth-token", "222222222222222222");
+                request.setRequestHeader("x-auth-token", token);
             },
           /*  headers: {
                 "Cookie": "SESSION=222222222222222222",
@@ -131,7 +127,7 @@ var Role  = function () {
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['65%' , '65%'],
-                content: '../../../../access/pages/authority/role/role_add.html'
+                content: 'resources/pages/authority/role/role_add.html'
             });
 
     });
@@ -148,7 +144,7 @@ var Role  = function () {
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area: ['80%', '90%'],
-                content: '../../../../access/pages/authority/menus/role_menus.html?roleId=' + roleId
+                content: 'resources/pages/authority/menus/role_menus.html?roleId=' + roleId
             });
         }
     });
