@@ -127,7 +127,7 @@ var Role  = function () {
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['65%' , '65%'],
-                content: '../../pages/authority/role/role_add.html'
+                content: '../pages/authority/role/role_add.html'
             });
 
     });
