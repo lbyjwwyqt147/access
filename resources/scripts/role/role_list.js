@@ -144,7 +144,7 @@ var Role  = function () {
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area: ['80%', '90%'],
-                content: '../../pages/authority/menus/role_menus.html?roleId=' + roleId
+                content: '../../../pages/authority/menus/role_menus.html?roleId=' + roleId
             });
         }
     });
