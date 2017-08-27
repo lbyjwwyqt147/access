@@ -12,7 +12,16 @@ var RoleUser  = function () {
             dataType:"json",
             success :function (data,textStatus) {
                 console.log(data);
-                initRoleTable(data.rows);
+
+                if(data.status == 0){
+                    initRoleTable(data.data.rows);
+                }else{
+                    layer.alert(data.msg, {
+                        skin: 'layui-layer-lan',
+                        closeBtn: 1,
+                        anim: 4 //动画类型
+                    });
+                }
             },
             error:function (XMLHttpRequest, textStatus, errorThrown) {
 
@@ -69,10 +78,23 @@ var RoleUser  = function () {
             dataType:"json",
             success :function (data,textStatus) {
                 console.log(data);
-                initUserRoleTable(data.rows);
+                if(data.status == 0){
+                    initUserRoleTable(data.data.rows);
+                }else{
+                    layer.alert(data.msg, {
+                        skin: 'layui-layer-lan',
+                        closeBtn: 1,
+                        anim: 4 //动画类型
+                    });
+                }
+
             },
             error:function (XMLHttpRequest, textStatus, errorThrown) {
-
+                layer.alert('网络出现错误!', {
+                    skin: 'layui-layer-lan',
+                    closeBtn: 1,
+                    anim: 4 //动画类型
+                });
             }
         });
     }
@@ -161,8 +183,15 @@ var RoleUser  = function () {
                 dataType:"json",
                 success :function (data,textStatus) {
                     console.log(data);
+
                     if(data.status == 0){
                         onRefreshTalbe();
+                    }else{
+                        layer.alert(data.msg, {
+                            skin: 'layui-layer-lan',
+                            closeBtn: 1,
+                            anim: 4 //动画类型
+                        });
                     }
 
                 },

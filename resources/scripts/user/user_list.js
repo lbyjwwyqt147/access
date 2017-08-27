@@ -10,7 +10,7 @@ var UserList  = function () {
             success :function (data,textStatus) {
                 console.log(data);
                 if(data.status == 0){
-                    initUserTable(data.rows);
+                    initUserTable(data.data.rows);
                 }else{
                     layer.alert(data.msg, {
                         skin: 'layui-layer-lan',

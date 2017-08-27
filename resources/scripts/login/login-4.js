@@ -287,9 +287,14 @@ var Login = function () {
                         dataType:"json",
                         success :function (data,textStatus) {
                             console.log(data);
+                            $(".register-form")[0].reset();
                         },
                         error:function (XMLHttpRequest, textStatus, errorThrown) {
-
+                            layer.alert('网络出现错误!', {
+                                skin: 'layui-layer-lan',
+                                closeBtn: 1,
+                                anim: 4 //动画类型
+                            });
                         }
                     });
                 }

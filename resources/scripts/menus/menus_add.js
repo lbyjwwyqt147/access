@@ -12,13 +12,26 @@ var MenusForm  = function () {
             dataType:"json",
             success :function (data,textStatus) {
                 console.log(data);
-                $("#muens-form")[0].reset();
-                var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
-                parent.layer.close(index);
+                if(data.status == 0){
+                    $("#muens-form")[0].reset();
+                    var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+                    parent.layer.close(index);
+                }else{
+                    layer.alert(data.msg, {
+                        skin: 'layui-layer-lan',
+                        closeBtn: 1,
+                        anim: 4 //动画类型
+                    });
+                }
+
 
             },
             error:function (XMLHttpRequest, textStatus, errorThrown) {
-
+                layer.alert('网络出现错误!', {
+                    skin: 'layui-layer-lan',
+                    closeBtn: 1,
+                    anim: 4 //动画类型
+                });
             }
         });
     }

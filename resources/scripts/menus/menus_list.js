@@ -6,7 +6,7 @@ var Menus  = function () {
     var getTreeData = function (pid) {
          $('#menus_tree').data('jstree',false);
         $.ajax({
-            url: basicUrl+ "/resourceMenus/tree2",
+            url: basicUrl+ "/resourceMenus/tree1",
             data:{
                 "pid":pid == "" ? "1" : pid
             },
@@ -16,13 +16,26 @@ var Menus  = function () {
                 console.log(data);
               //  treeData.push(data.data);
               //  console.log(treeData);
-               initMenusTree(data);
+                if(data.status == 0){
+                    initMenusTree(data.data);
+                }else{
+                    layer.alert(data.msg, {
+                        skin: 'layui-layer-lan',
+                        closeBtn: 1,
+                        anim: 4 //动画类型
+                    });
+                }
+
                /* $('#menus_tree').data('jstree',false).empty().jstree({'core': {'data': data
                 }
                 });*/
             },
             error:function (XMLHttpRequest, textStatus, errorThrown) {
-
+                layer.alert('网络出现错误!', {
+                    skin: 'layui-layer-lan',
+                    closeBtn: 1,
+                    anim: 4 //动画类型
+                });
             }
         });
     }
@@ -119,10 +132,23 @@ var Menus  = function () {
             dataType:"json",
             success :function (data,textStatus) {
                 console.log(data);
-                initMenusTable(data.data);
+                if(data.status == 0){
+                    initMenusTable(data.data);
+                }else{
+                    layer.alert(data.msg, {
+                        skin: 'layui-layer-lan',
+                        closeBtn: 1,
+                        anim: 4 //动画类型
+                    });
+                }
+
             },
             error:function (XMLHttpRequest, textStatus, errorThrown) {
-
+                layer.alert('网络出现错误!', {
+                    skin: 'layui-layer-lan',
+                    closeBtn: 1,
+                    anim: 4 //动画类型
+                });
             }
         });
     }
