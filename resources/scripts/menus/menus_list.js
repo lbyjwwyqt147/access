@@ -234,7 +234,7 @@ var Menus  = function () {
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['63%' , '80%'],
-                content: '../../pages/authority/menus/menus_add.html?pid='+pid,
+                content: '../../../pages/authority/menus/menus_add.html?pid='+pid,
                 end: function () {
                     refurbish();
                 }
