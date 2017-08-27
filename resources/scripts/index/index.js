@@ -33,7 +33,7 @@ var Index = function () {
             success:function(data) {
                 console.log(data);
 
-                initMenus(data);
+                initMenus(data.data);
 
             },
             error : function() {
