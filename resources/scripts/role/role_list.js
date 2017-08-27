@@ -41,7 +41,7 @@ var Role  = function () {
 
                 console.log(data);
                 if(data.status == 0){
-                    initRoleTable(data.rows);
+                    initRoleTable(data.data.rows);
                 }else{
                     layer.alert(data.msg, {
                         skin: 'layui-layer-lan',
