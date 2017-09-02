@@ -32,8 +32,16 @@ var Index = function () {
             dataType:'JSON',
             success:function(data) {
                 console.log(data);
+                if(data.status == 0){
+                    initMenus(data.data);
+                }else{
+                    layer.alert(data.msg, {
+                        skin: 'layui-layer-lan',
+                        closeBtn: 1,
+                        anim: 4 //动画类型
+                    });
+                }
 
-                initMenus(data.data);
 
             },
             error : function() {
