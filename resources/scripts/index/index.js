@@ -2,6 +2,7 @@ var Index = function () {
     var basicUrl = commonUtil.httpUrl;
     var userId = "";
     var token = commonUtil.getUrlParams("TOKEN");
+    token = token != null ? token : "";
     var sessionId = commonUtil.getUrlParams("SESSION");
     var roleId = 1;
     /**
@@ -16,11 +17,7 @@ var Index = function () {
 
         $.ajax( {
             url: basicUrl+ "/resourceMenus/user/"+userId+"/token/"+token,
-            data:{
-                "userId":userId,
-                "SESSION":sessionId,
-                "token":token
-            },
+
             xhrFields: {
                 withCredentials: true
             },
