@@ -15,7 +15,7 @@ var Index = function () {
         console.log($.data({}, 'name'));//aty
 
         $.ajax( {
-            url: basicUrl+ "/resourceMenus/user",
+            url: basicUrl+ "/resourceMenus/user/"+userId+"/token/"+token,
             data:{
                 "userId":userId,
                 "SESSION":sessionId,
@@ -46,6 +46,11 @@ var Index = function () {
 
         //退出
         jQuery('#logout-btn').click(function () {
+            logout();
+        });
+
+        //退出
+        jQuery('#logout1-btn').click(function () {
             logout();
         });
 
