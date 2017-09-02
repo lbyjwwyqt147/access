@@ -132,8 +132,8 @@ var Index = function () {
             dataType:'JSON',
             success:function(data) {
                 console.log(data);
-
-                window.location.href = "resources/index.html";
+                alert(commonUtil.getIp());
+                window.location.href = commonUtil.getIp();
 
 
             },

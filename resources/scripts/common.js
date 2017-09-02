@@ -9,7 +9,7 @@ var commonUtil = {
     memberId : "",
     token:"",
     sessionId:"",
-    httpUrl:"http://10.1.121.89:80/security/api/v1",
+    httpUrl:"http://localhost:80/security/api/v1",
     //ihttpUrl:"http://127.0.0.1:18080/security/api/v1",
     webUrl:"http://localhost:63342/",
     //webUrl:"http://localhost:80/",
@@ -62,6 +62,13 @@ var commonUtil = {
 
     },
 
+    getIp:function(){
+        //获取主机域名：
+        var i =   window.location.hostname;
+        //获取端口号
+        var p = window.location.port;
+        return i+":"+p;
+    },
     getUrlParams:function(name){
         var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
         var r = window.location.search.substr(1).match(reg);
