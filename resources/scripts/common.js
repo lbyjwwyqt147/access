@@ -67,7 +67,7 @@ var commonUtil = {
         var i =   window.location.hostname;
         //获取端口号
         var p = window.location.port;
-        return i+":"+p;
+        return i;
     },
     getUrlParams:function(name){
         var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");

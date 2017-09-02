@@ -132,8 +132,8 @@ var Index = function () {
             dataType:'JSON',
             success:function(data) {
                 console.log(data);
-                alert(commonUtil.getIp());
-                window.location.href = commonUtil.getIp();
+                console.log(commonUtil.getIp());
+                window.location.href = "http://"+commonUtil.getIp();
 
 
             },
