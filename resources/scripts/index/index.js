@@ -43,6 +43,12 @@ var Index = function () {
                });
             }
          });
+
+        //退出
+        jQuery('#logout-btn').click(function () {
+            logout();
+        });
+
     }
 
     /**
@@ -98,10 +104,40 @@ var Index = function () {
        return html;
     }
 
+
     /**
-     * 打开页面
-     * @param url
+     * 退出系统
      */
+    function logout() {
+        $.ajax( {
+            url: basicUrl+ "/logout",
+            data:{
+
+            },
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            type:'GET',
+            dataType:'JSON',
+            success:function(data) {
+                console.log(data);
+
+                window.location.href = "resources/index.html";
+
+
+            },
+            error : function() {
+                layer.open({
+                    title: '提示',
+                    content: '网络错误.'
+                });
+            }
+        });
+    }
+
+
+
 
 
 
@@ -112,6 +148,10 @@ var Index = function () {
             menusData();
 
         },
+        /**
+         * 打开页面
+         * @param url
+         */
         openPageHtml: function(url) {
             if(url != "" || url != null){
                 $("#mainIframe").attr("src",url);
