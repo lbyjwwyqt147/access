@@ -65,16 +65,16 @@ var Login = function () {
                             	var obj = data.data;
                             	console.log(obj);
                                 commonUtil.setSeesionId(obj.SESSION);
-                                commonUtil.setToken(obj.x-auth-token);
+                                commonUtil.setToken(obj.token);
                             	document.cookie="SESSION="+obj.SESSION;
                                 $.cookie('SESSION', obj.SESSION);
-                                $.cookie('token', obj.x-auth-token);
+                                $.cookie('token', obj.token);
                             	console.log("登录成功..........");
                                 var myObj = {};
                                 // data()添加属性
                                 $.data(myObj, 'name', 'aty');
                                 console.log(commonUtil.getSessionId());
-                                window.location.href = "resources/pages/index.html?SESSION="+obj.SESSION+"&TOKEN="+obj.x-auth-token;
+                                window.location.href = "resources/pages/index.html?SESSION="+obj.SESSION+"&TOKEN="+obj.token;
                             }else{
                                 layer.alert(data.msg, {
                                     skin: 'layui-layer-lan',
