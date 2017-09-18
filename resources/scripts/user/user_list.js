@@ -1,7 +1,7 @@
 var UserList  = function () {
     var basicUrl = commonUtil.httpUrl;
     var userId = "";
-
+    var  token = $.cookie('token');
     var userTableData = function () {
         $.ajax({
             url: basicUrl+ "/users",
@@ -11,6 +11,9 @@ var UserList  = function () {
                 withCredentials: true
             },
             crossDomain: true,
+            beforeSend: function(request) {
+                request.setRequestHeader("Authorization", token);
+            },
             success :function (data,textStatus) {
                 console.log(data);
                 if(data.status == 0){

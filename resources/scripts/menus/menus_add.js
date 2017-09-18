@@ -2,6 +2,7 @@ var MenusForm  = function () {
     var basicUrl = commonUtil.httpUrl;
     var pid = commonUtil.getUrlParams("pid");
     var index = parent.layer.getFrameIndex(window.name);
+    var  token = $.cookie('token');
     function submitForm() {
         $("#parentMenuNumber").val(pid);
         commonUtil.inputTrim();
@@ -14,6 +15,9 @@ var MenusForm  = function () {
                 withCredentials: true
             },
             crossDomain: true,
+            beforeSend: function(request) {
+                request.setRequestHeader("Authorization", token);
+            },
             success :function (data,textStatus) {
                 console.log(data);
                 if(data.status == 0){

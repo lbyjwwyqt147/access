@@ -3,6 +3,7 @@ var Menus  = function () {
     var  pid = "";
     var  treeData = [];
     var layerIndex = 0;
+    var  token = $.cookie('token');
     var getTreeData = function (pid) {
          $('#menus_tree').data('jstree',false);
         $.ajax({
@@ -16,6 +17,9 @@ var Menus  = function () {
                 withCredentials: true
             },
             crossDomain: true,
+            beforeSend: function(request) {
+                request.setRequestHeader("Authorization", token);
+            },
             success :function (data,textStatus) {
                 console.log(data);
               //  treeData.push(data.data);

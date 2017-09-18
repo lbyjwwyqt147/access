@@ -23,7 +23,7 @@ var Role  = function () {
             },
             crossDomain: true,
             beforeSend: function(request) {
-                request.setRequestHeader("x-auth-token", token);
+                request.setRequestHeader("Authorization", token);
             },
           /*  headers: {
                 "Cookie": "SESSION=222222222222222222",

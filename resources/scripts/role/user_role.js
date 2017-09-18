@@ -1,6 +1,7 @@
 var RoleUser  = function () {
     var basicUrl = commonUtil.httpUrl;
     var userId = commonUtil.getUrlParams("userId");
+    var  token = $.cookie('token');
     var roleTableData = function () {
         console.log("userId: "+userId);
         $.ajax({
@@ -14,6 +15,9 @@ var RoleUser  = function () {
                 withCredentials: true
             },
             crossDomain: true,
+            beforeSend: function(request) {
+                request.setRequestHeader("Authorization", token);
+            },
             success :function (data,textStatus) {
                 console.log(data);
 

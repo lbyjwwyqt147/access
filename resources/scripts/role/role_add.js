@@ -1,6 +1,6 @@
 var RoleForm  = function () {
     var basicUrl = commonUtil.httpUrl;
-
+    var  token = $.cookie('token');
     function submitForm() {
         commonUtil.inputTrim();
         $.ajax({
@@ -12,6 +12,9 @@ var RoleForm  = function () {
                 withCredentials: true
             },
             crossDomain: true,
+            beforeSend: function(request) {
+                request.setRequestHeader("Authorization", token);
+            },
             success :function (data,textStatus) {
                 console.log(data);
                 if(data.status == 0){

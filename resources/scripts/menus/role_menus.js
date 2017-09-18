@@ -2,6 +2,7 @@ var RoleMenus  = function () {
     var basicUrl = commonUtil.httpUrl;
     var roleId = commonUtil.getUrlParams("roleId");
     var menusIdsArray = new Array();
+    var  token = $.cookie('token');
     /**
      * 已分配资源树 数据源
      * @param roleId
@@ -19,6 +20,9 @@ var RoleMenus  = function () {
                 withCredentials: true
             },
             crossDomain: true,
+            beforeSend: function(request) {
+                request.setRequestHeader("Authorization", token);
+            },
             success :function (data,textStatus) {
                 console.log(data);
                 if(data.status == 0){
