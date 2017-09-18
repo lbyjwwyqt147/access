@@ -130,6 +130,10 @@ var Index = function () {
             crossDomain: true,
             type:'GET',
             dataType:'JSON',
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
             success:function(data) {
                 console.log(data);
                 console.log(commonUtil.getIp());

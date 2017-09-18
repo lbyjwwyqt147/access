@@ -15,6 +15,10 @@ var RoleMenus  = function () {
             },
             type:"GET",
             dataType:"json",
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
             success :function (data,textStatus) {
                 console.log(data);
                 if(data.status == 0){

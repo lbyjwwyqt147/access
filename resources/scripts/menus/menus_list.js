@@ -12,6 +12,10 @@ var Menus  = function () {
             },
             type:"GET",
             dataType:"json",
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
             success :function (data,textStatus) {
                 console.log(data);
               //  treeData.push(data.data);

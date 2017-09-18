@@ -10,6 +10,10 @@ var RoleUser  = function () {
                 "userId":userId
             },
             dataType:"json",
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
             success :function (data,textStatus) {
                 console.log(data);
 
