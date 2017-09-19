@@ -116,6 +116,8 @@ var Index = function () {
      * 退出系统
      */
     function logout() {
+        console.log("sessionId: " + sessionId);
+        console.log("token: " + token);
         $.ajax( {
             url: basicUrl+ "/logout",
             data:{
@@ -131,6 +133,9 @@ var Index = function () {
                 withCredentials: true
             },
             crossDomain: true,
+            beforeSend: function(request) {
+                request.setRequestHeader("Authorization", token);
+            },
             success:function(data) {
                 console.log(data);
                 console.log(commonUtil.getIp());
