@@ -23,7 +23,7 @@ var Index = function () {
             },
             crossDomain: true,
             beforeSend: function(request) {
-                request.setRequestHeader("x-auth-token", token);
+                request.setRequestHeader("Authorization", token);
             },
             type:'GET',
             dataType:'JSON',
