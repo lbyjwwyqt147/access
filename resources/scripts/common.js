@@ -18,13 +18,15 @@ var commonUtil = {
         this.sessionId = sessionId;
     },
     getSessionId:function () {
-       return this.sessionId;
+        this.sessionId =  $.cookie('SESSION');
+        return this.sessionId;
     },
 
     setToken : function (token) {
         this.token = token;
     },
     getToken:function () {
+        this.token = $.cookie('token');
         return this.token;
     },
 
