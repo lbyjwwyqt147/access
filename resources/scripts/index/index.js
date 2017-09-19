@@ -1,9 +1,9 @@
 var Index = function () {
     var basicUrl = commonUtil.httpUrl;
     var userId = "";
-    var token = commonUtil.getToken();
+    var token = $.cookie('token');
     token = token != null ? token : "";
-    var sessionId = commonUtil.getSessionId();
+    var sessionId = $.cookie('SESSION');
     var roleId = 1;
     /**
      * 菜单数据源
