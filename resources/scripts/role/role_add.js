@@ -1,7 +1,15 @@
 var RoleForm  = function () {
     var basicUrl = commonUtil.httpUrl;
-    var  token = $.cookie('token');
+
+    var token = commonUtil.getToken();
+    token = token != null ? token : "";
+    var sessionId = commonUtil.getSessionId();
+
     function submitForm() {
+
+        console.log("sessionId: " + sessionId);
+        console.log("token: " + token);
+
         commonUtil.inputTrim();
         $.ajax({
             url: basicUrl+ "/roles",

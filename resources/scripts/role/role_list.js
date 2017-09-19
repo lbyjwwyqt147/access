@@ -1,19 +1,19 @@
 var Role  = function () {
     var basicUrl = commonUtil.httpUrl;
     var roleId = "";
-    var  token = $.cookie('token');
+    var token = commonUtil.getToken();
+    token = token != null ? token : "";
+    var sessionId = commonUtil.getSessionId();
 
     var roleTableData = function () {
-        console.log(commonUtil.getSessionId());
 
-      //  document.cookie="SESSION=222222222222222222";
+        console.log("sessionId: " + sessionId);
+        console.log("token: " + token);
 
-      //  $.cookie('SESSION',"222222222222222222");
-        //$.cookie('token', "11111111111");
+        console.log("cookie sessionId : "+ $.cookie('SESSION'));
+        console.log("cookie token: "+ $.cookie('token'));
+        console.log("document.cookie : " +document.cookie);
 
-        console.log($.cookie('SESSION'));
-        console.log($.cookie('token'));
-        console.log(document.cookie);
         $.ajax({
             url: basicUrl+ "/roles",
             type:"GET",

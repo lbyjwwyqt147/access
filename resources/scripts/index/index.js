@@ -1,19 +1,16 @@
 var Index = function () {
     var basicUrl = commonUtil.httpUrl;
     var userId = "";
-    var token = commonUtil.getUrlParams("TOKEN");
+    var token = commonUtil.getToken();
     token = token != null ? token : "";
-    var sessionId = commonUtil.getUrlParams("SESSION");
+    var sessionId = commonUtil.getSessionId();
     var roleId = 1;
     /**
      * 菜单数据源
      */
     var menusData = function() {
-        commonUtil.setToken(token);
-        commonUtil.setSeesionId(sessionId);
-        console.log(commonUtil.getSessionId());
-        // data()读取属性
-        console.log($.data({}, 'name'));//aty
+        console.log("sessionId: " + sessionId);
+        console.log("token: " + token);
 
         $.ajax( {
             url: basicUrl+ "/resourceMenus/user/"+userId+"/token/"+token,

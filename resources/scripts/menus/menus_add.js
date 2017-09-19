@@ -2,8 +2,14 @@ var MenusForm  = function () {
     var basicUrl = commonUtil.httpUrl;
     var pid = commonUtil.getUrlParams("pid");
     var index = parent.layer.getFrameIndex(window.name);
-    var  token = $.cookie('token');
+    var token = commonUtil.getToken();
+    token = token != null ? token : "";
+    var sessionId = commonUtil.getSessionId();
     function submitForm() {
+
+        console.log("sessionId: " + sessionId);
+        console.log("token: " + token);
+
         $("#parentMenuNumber").val(pid);
         commonUtil.inputTrim();
         $.ajax({

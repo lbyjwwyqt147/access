@@ -3,8 +3,14 @@ var Menus  = function () {
     var  pid = "";
     var  treeData = [];
     var layerIndex = 0;
-    var  token = $.cookie('token');
+    var token = commonUtil.getToken();
+    token = token != null ? token : "";
+    var sessionId = commonUtil.getSessionId();
     var getTreeData = function (pid) {
+
+        console.log("sessionId: " + sessionId);
+        console.log("token: " + token);
+
          $('#menus_tree').data('jstree',false);
         $.ajax({
             url: basicUrl+ "/resourceMenus/tree1",

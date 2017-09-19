@@ -1,9 +1,14 @@
 var RoleUser  = function () {
     var basicUrl = commonUtil.httpUrl;
     var userId = commonUtil.getUrlParams("userId");
-    var  token = $.cookie('token');
+    var token = commonUtil.getToken();
+    token = token != null ? token : "";
+    var sessionId = commonUtil.getSessionId();
     var roleTableData = function () {
         console.log("userId: "+userId);
+        console.log("sessionId: " + sessionId);
+        console.log("token: " + token);
+
         $.ajax({
             url: basicUrl+ "/userRolers/n",
             type:"GET",

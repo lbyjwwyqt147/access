@@ -70,11 +70,10 @@ var Login = function () {
                                 $.cookie('SESSION', obj.SESSION);
                                 $.cookie('token', obj.token);
                             	console.log("登录成功..........");
-                                var myObj = {};
-                                // data()添加属性
-                                $.data(myObj, 'name', 'aty');
+
                                 console.log(commonUtil.getSessionId());
-                                window.location.href = "resources/pages/index.html?SESSION="+obj.SESSION+"&TOKEN="+obj.token;
+                               // window.location.href = "resources/pages/index.html?SESSION="+obj.SESSION+"&TOKEN="+obj.token;
+                                window.location.href = "resources/pages/index.html";
                             }else{
                                 layer.alert(data.msg, {
                                     skin: 'layui-layer-lan',

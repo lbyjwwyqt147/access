@@ -2,12 +2,20 @@ var RoleMenus  = function () {
     var basicUrl = commonUtil.httpUrl;
     var roleId = commonUtil.getUrlParams("roleId");
     var menusIdsArray = new Array();
-    var  token = $.cookie('token');
+
+    var token = commonUtil.getToken();
+    token = token != null ? token : "";
+    var sessionId = commonUtil.getSessionId();
+
     /**
      * 已分配资源树 数据源
      * @param roleId
      */
     var getTreeYesData = function () {
+
+        console.log("sessionId: " + sessionId);
+        console.log("token: " + token);
+
         $('#role-menus-tree').data('jstree',false);
         $.ajax({
             url: basicUrl+ "/resourceMenus/y",

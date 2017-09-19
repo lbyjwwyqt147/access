@@ -1,8 +1,13 @@
 var UserList  = function () {
     var basicUrl = commonUtil.httpUrl;
     var userId = "";
-    var  token = $.cookie('token');
+    var token = commonUtil.getToken();
+    token = token != null ? token : "";
+    var sessionId = commonUtil.getSessionId();
     var userTableData = function () {
+        console.log("sessionId: " + sessionId);
+        console.log("token: " + token);
+
         $.ajax({
             url: basicUrl+ "/users",
             type:"GET",
