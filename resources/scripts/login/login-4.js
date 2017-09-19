@@ -76,7 +76,7 @@ var Login = function () {
                                 console.log("cookie token: "+ $.cookie('token'));
 
                                // window.location.href = "resources/pages/index.html?SESSION="+obj.SESSION+"&TOKEN="+obj.token;
-                               // window.location.href = "resources/pages/index.html";
+                                window.location.href = "resources/pages/index.html";
                             }else{
                                 layer.alert(data.msg, {
                                     skin: 'layui-layer-lan',
