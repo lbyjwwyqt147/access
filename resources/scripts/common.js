@@ -18,7 +18,7 @@ var commonUtil = {
         this.sessionId = sessionId;
     },
     getSessionId:function () {
-       this.sessionId =  $.cookie('SESSION');
+        this.sessionId =  $.cookie('SESSION');
         return this.sessionId;
     },
 

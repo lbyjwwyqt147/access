@@ -12,7 +12,6 @@ var Role  = function () {
 
         console.log("cookie sessionId : "+ $.cookie('SESSION'));
         console.log("cookie token: "+ $.cookie('token'));
-        console.log("document.cookie : " +document.cookie);
 
         $.ajax({
             url: basicUrl+ "/roles",

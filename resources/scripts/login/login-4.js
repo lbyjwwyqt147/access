@@ -71,9 +71,12 @@ var Login = function () {
                                 $.cookie('token', obj.token);
                             	console.log("登录成功..........");
 
-                                console.log(commonUtil.getSessionId());
+
+                                console.log("cookie sessionId : "+ $.cookie('SESSION'));
+                                console.log("cookie token: "+ $.cookie('token'));
+
                                // window.location.href = "resources/pages/index.html?SESSION="+obj.SESSION+"&TOKEN="+obj.token;
-                                window.location.href = "resources/pages/index.html";
+                               // window.location.href = "resources/pages/index.html";
                             }else{
                                 layer.alert(data.msg, {
                                     skin: 'layui-layer-lan',
