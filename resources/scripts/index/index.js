@@ -2,6 +2,7 @@ var Index = function () {
     var basicUrl = commonUtil.httpUrl;
     var userId = "";
     var token = commonUtil.getUrlParams("TOKEN");
+    token = token != null ? token : "";
     var sessionId = commonUtil.getUrlParams("SESSION");
     var roleId = 1;
     /**
@@ -15,12 +16,8 @@ var Index = function () {
         console.log($.data({}, 'name'));//aty
 
         $.ajax( {
-            url: basicUrl+ "/resourceMenus/user",
-            data:{
-                "userId":userId,
-                "SESSION":sessionId,
-                "token":token
-            },
+            url: basicUrl+ "/resourceMenus/user/"+userId+"/token/"+token,
+
             xhrFields: {
                 withCredentials: true
             },
@@ -32,8 +29,16 @@ var Index = function () {
             dataType:'JSON',
             success:function(data) {
                 console.log(data);
+                if(data.status == 0){
+                    initMenus(data.data);
+                }else{
+                    layer.alert(data.msg, {
+                        skin: 'layui-layer-lan',
+                        closeBtn: 1,
+                        anim: 4 //动画类型
+                    });
+                }
 
-                initMenus(data);
 
             },
             error : function() {
@@ -43,6 +48,17 @@ var Index = function () {
                });
             }
          });
+
+        //退出
+        jQuery('#logout-btn').click(function () {
+            logout();
+        });
+
+        //退出
+        jQuery('#logout1-btn').click(function () {
+            logout();
+        });
+
     }
 
     /**
@@ -98,10 +114,40 @@ var Index = function () {
        return html;
     }
 
+
     /**
-     * 打开页面
-     * @param url
+     * 退出系统
      */
+    function logout() {
+        $.ajax( {
+            url: basicUrl+ "/logout",
+            data:{
+
+            },
+            xhrFields: {
+                withCredentials: true
+            },
+            crossDomain: true,
+            type:'GET',
+            dataType:'JSON',
+            success:function(data) {
+                console.log(data);
+                console.log(commonUtil.getIp());
+                window.location.href = "http://"+commonUtil.getIp();
+
+
+            },
+            error : function() {
+                layer.open({
+                    title: '提示',
+                    content: '网络错误.'
+                });
+            }
+        });
+    }
+
+
+
 
 
 
@@ -112,6 +158,10 @@ var Index = function () {
             menusData();
 
         },
+        /**
+         * 打开页面
+         * @param url
+         */
         openPageHtml: function(url) {
             if(url != "" || url != null){
                 $("#mainIframe").attr("src",url);

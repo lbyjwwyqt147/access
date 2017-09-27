@@ -62,6 +62,13 @@ var commonUtil = {
 
     },
 
+    getIp:function(){
+        //获取主机域名：
+        var i =   window.location.hostname;
+        //获取端口号
+        var p = window.location.port;
+        return i;
+    },
     getUrlParams:function(name){
         var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
         var r = window.location.search.substr(1).match(reg);

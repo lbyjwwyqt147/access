@@ -41,7 +41,7 @@ var Role  = function () {
 
                 console.log(data);
                 if(data.status == 0){
-                    initRoleTable(data.rows);
+                    initRoleTable(data.data.rows);
                 }else{
                     layer.alert(data.msg, {
                         skin: 'layui-layer-lan',
@@ -127,7 +127,7 @@ var Role  = function () {
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area : ['65%' , '65%'],
-                content: 'resources/pages/authority/role/role_add.html'
+                content: '../../../pages/authority/role/role_add.html'
             });
 
     });
@@ -144,7 +144,7 @@ var Role  = function () {
                 maxmin: true,
                 shadeClose: true, //点击遮罩关闭层
                 area: ['80%', '90%'],
-                content: 'resources/pages/authority/menus/role_menus.html?roleId=' + roleId
+                content: '../../../pages/authority/menus/role_menus.html?roleId=' + roleId
             });
         }
     });
